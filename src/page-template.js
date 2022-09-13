@@ -5,8 +5,8 @@ const generateTeam = team => {
     // create the manager html
     const generateManager = manager => {
         return `
-        <div>
-            <div>
+        <div class = "card col-5 m-2" style = "width: 20rem;">
+            <div class = "card-body">
                 <h2>${manager.getName()}</h2>
                 <h3>
                     <i class="fas fa-mug-hot mr-2"></i> ${manager.getRole()}
@@ -21,7 +21,7 @@ const generateTeam = team => {
                         Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a>
                     </li>
                     <li>
-                        Office number: ${manager.getOfficeNumber()}
+                        Office number: ${manager.theOfficeNum()}
                     </li>
                 </ul>
             </div>
@@ -34,19 +34,19 @@ const generateTeam = team => {
         return `
         <div>
             <div>
-                <h2>${engineer.getName()}</h2>
+                <h2>${engineer.theName()}</h2>
                 <h3>
                     <i class="fas fa-glasses mr-2"></i>${engineer.getRole()}
                 </h3>
             </div>
             <div>
                 <ul>
-                    <li>ID: ${engineer.getId()}</li>
+                    <li>ID: ${engineer.theId()}</li>
                     <li>
-                        Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a>
+                        Email: <a href="mailto:${engineer.theEmail()}">${engineer.theEmail()}</a>
                     </li>
                     <li>
-                        GitHub: <a href="https://github.com/${engineer.getGithub()}" target="_blank" rel="noopener noreferrer">${engineer.getGithub()}</a>
+                        GitHub: <a href="https://github.com/${engineer.theGit()}" target="_blank" rel="noopener noreferrer">${engineer.theGit()}</a>
                     </li>
                 </ul>
             </div>
@@ -59,16 +59,16 @@ const generateTeam = team => {
         return `
         <div>
     <div>
-        <h2>${intern.getName()}</h2>
+        <h2>${intern.theName()}</h2>
         <h3>
             <i class="fas fa-user-graduate mr-2"></i>${intern.getRole()}
         </h3>
     </div>
     <div>
         <ul>
-            <li>ID: ${intern.getId()}</li>
-            <li>${intern.getEmail()}</a></li>
-            <li>School: ${intern.getSchool()}</li>
+            <li>ID: ${intern.theId()}</li>
+            <li>${intern.theEmail()}</a></li>
+            <li>School: ${intern.theSchool()}</li>
         </ul>
     </div>
 </div>
