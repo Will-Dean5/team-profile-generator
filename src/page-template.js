@@ -1,52 +1,31 @@
 // PROVIDED BY INSTRUCTOR 2022-09-09
 // create the team
+const Manager = require('../lib/Manager');
+const Engineer = require('../lib/Engineer');
+const Intern = require('../lib/Intern');
+
 const generateTeam = team => {
 
-    // create the manager html
-    const generateManager = manager => {
-        return `
-        <div class = "card col-5 m-2" style = "width: 20rem;">
-            <div class = "card-body">
-                <h2>${manager.theName()}</h2>
-                <h3>
-                    <i class="fas fa-mug-hot mr-2"></i> ${manager.getRole()}
-                </h3>
-            </div>
-            <div>
-                <ul>
-                    <li>
-                        ID: ${manager.theId()}
-                    </li>
-                    <li>
-                        Email: <a href="mailto:${manager.theEmail()}">${manager.theEmail()}</a>
-                    </li>
-                    <li>
-                        Office number: ${manager.theOfficeNum()}
-                    </li>
-                </ul>
-            </div>
-        </div>
-        `;
-    };
-
-    // create the html for engineers
-    const generateEngineer = engineer => {
+    // create the Manager html
+    const generateManager = Manager => {
         return `
         <div>
             <div>
-                <h2>${engineer.theName()}</h2>
+                <h2>${Manager.theName()}</h2>
                 <h3>
-                    <i class="fas fa-glasses mr-2"></i>${engineer.getRole()}
+                    <i class="fas fa-mug-hot mr-2"></i> ${Manager.getRole()}
                 </h3>
             </div>
             <div>
                 <ul>
-                    <li>ID: ${engineer.theId()}</li>
                     <li>
-                        Email: <a href="mailto:${engineer.theEmail()}">${engineer.theEmail()}</a>
+                        ID: ${Manager.theId()}
                     </li>
                     <li>
-                        GitHub: <a href="https://github.com/${engineer.theGit()}" target="_blank" rel="noopener noreferrer">${engineer.theGit()}</a>
+                        Email: <a href="mailto:${Manager.theEmail()}">${Manager.theEmail()}</a>
+                    </li>
+                    <li>
+                        Office number: ${Manager.theOfficeNum()}
                     </li>
                 </ul>
             </div>
@@ -54,21 +33,46 @@ const generateTeam = team => {
         `;
     };
 
-    // create the html for interns
-    const generateIntern = intern => {
+    // create the html for Engineers
+    const generateEngineer = Engineer => {
+        return `
+        <div>
+            <div>
+                <h2>${Engineer.theName()}</h2>
+                <h3>
+                    <i class="fas fa-glasses mr-2"></i>${Engineer.getRole()}
+                </h3>
+            </div>
+            <div>
+                <ul>
+                    <li>ID: ${Engineer.theId()}</li>
+                    <li>
+                        Email: <a href="mailto:${Engineer.theEmail()}">${Engineer.theEmail()}</a>
+                    </li>
+                    <li>
+                        GitHub: <a href="https://github.com/${Engineer.theGit()}" target="_blank" rel="noopener noreferrer">${Engineer.theGit()}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        `;
+    };
+
+    // create the html for Interns
+    const generateIntern = Intern => {
         return `
         <div>
     <div>
-        <h2>${intern.theName()}</h2>
+        <h2>${Intern.theName()}</h2>
         <h3>
-            <i class="fas fa-user-graduate mr-2"></i>${intern.getRole()}
+            <i class="fas fa-user-graduate mr-2"></i>${Intern.getRole()}
         </h3>
     </div>
     <div>
         <ul>
-            <li>ID: ${intern.theId()}</li>
-            <li>${intern.theEmail()}</a></li>
-            <li>School: ${intern.theSchool()}</li>
+            <li>ID: ${Intern.theId()}</li>
+            <li>${Intern.theEmail()}</a></li>
+            <li>School: ${Intern.theSchool()}</li>
         </ul>
     </div>
 </div>
@@ -79,16 +83,16 @@ const generateTeam = team => {
 
     html.push(team
         .filter(employee => employee.getRole() === "Manager")
-        .map(manager => generateManager(manager))
+        .map(Manager => generateManager(Manager))
     );
     html.push(team
         .filter(employee => employee.getRole() === "Engineer")
-        .map(engineer => generateEngineer(engineer))
+        .map(Engineer => generateEngineer(Engineer))
         .join("")
     );
     html.push(team
         .filter(employee => employee.getRole() === "Intern")
-        .map(intern => generateIntern(intern))
+        .map(Intern => generateIntern(Intern))
         .join("")
     );
 
