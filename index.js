@@ -7,7 +7,7 @@ const fs = require('fs');
 //const questionsEng = require('./src/questionsEng');
 //const questionsInt = require('./src/questionsInt');
 const template = require('./src/page-template');
-const pageTemplate = require('./src/page-template');
+//const pageTemplate = require('./src/page-template');
 const prompt = inquirer.createPromptModule();
 const team = [];
 // TODO: CODE GOES HERE
@@ -108,7 +108,7 @@ function newMember() {
         }
         if(answer.value === 'Im done') {
             console.log(team);
-            fs.writeFile(`dist/team.html`, pageTemplate(team),function() {
+            fs.writeFile(`dist/team.html`, template(team),function() {
                 console.log('success');
             } )
         }

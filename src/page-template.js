@@ -7,7 +7,7 @@ const generateTeam = team => {
         return `
         <div class = "card col-5 m-2" style = "width: 20rem;">
             <div class = "card-body">
-                <h2>${manager.getName()}</h2>
+                <h2>${manager.theName()}</h2>
                 <h3>
                     <i class="fas fa-mug-hot mr-2"></i> ${manager.getRole()}
                 </h3>
@@ -15,10 +15,10 @@ const generateTeam = team => {
             <div>
                 <ul>
                     <li>
-                        ID: ${manager.getId()}
+                        ID: ${manager.theId()}
                     </li>
                     <li>
-                        Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a>
+                        Email: <a href="mailto:${manager.theEmail()}">${manager.theEmail()}</a>
                     </li>
                     <li>
                         Office number: ${manager.theOfficeNum()}
