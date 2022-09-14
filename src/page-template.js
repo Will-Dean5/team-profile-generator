@@ -1,126 +1,52 @@
-// PROVIDED BY INSTRUCTOR 2022-09-09
-// create the team
-const Manager = require('../lib/Manager');
-const Engineer = require('../lib/Engineer');
-const Intern = require('../lib/Intern');
 
-const generateTeam = team => {
-
-    // create the Manager html
-    const generateManager = Manager => {
-        return `
-        <div>
-            <div>
-                <h2>${Manager.theName()}</h2>
-                <h3>
-                    <i class="fas fa-mug-hot mr-2"></i> ${Manager.getRole()}
-                </h3>
-            </div>
-            <div>
-                <ul>
-                    <li>
-                        ID: ${Manager.theId()}
-                    </li>
-                    <li>
-                        Email: <a href="mailto:${Manager.theEmail()}">${Manager.theEmail()}</a>
-                    </li>
-                    <li>
-                        Office number: ${Manager.theOfficeNum()}
-                    </li>
-                </ul>
-            </div>
-        </div>
-        `;
-    };
-
-    // create the html for Engineers
-    const generateEngineer = Engineer => {
-        return `
-        <div>
-            <div>
-                <h2>${Engineer.theName()}</h2>
-                <h3>
-                    <i class="fas fa-glasses mr-2"></i>${Engineer.getRole()}
-                </h3>
-            </div>
-            <div>
-                <ul>
-                    <li>ID: ${Engineer.theId()}</li>
-                    <li>
-                        Email: <a href="mailto:${Engineer.theEmail()}">${Engineer.theEmail()}</a>
-                    </li>
-                    <li>
-                        GitHub: <a href="https://github.com/${Engineer.theGit()}" target="_blank" rel="noopener noreferrer">${Engineer.theGit()}</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        `;
-    };
-
-    // create the html for Interns
-    const generateIntern = Intern => {
-        return `
-        <div>
-    <div>
-        <h2>${Intern.theName()}</h2>
-        <h3>
-            <i class="fas fa-user-graduate mr-2"></i>${Intern.getRole()}
-        </h3>
+function generateHtml(team) {
+    var template = `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Team Members</title>
+        <link rel="stylesheet" href="bootstrap.min(1).css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    </head>
+    <body class="text-light bg-dark vh-100">
+        <h1 class="text-center mt-3">My Team</h1>
+        <div class="container-fluid d-flex h-100 align-items-center justify-content-center">
+        ${team.map(employee => {
+            return generateCard(employee)
+        })
+        .join('')
+    }
     </div>
-    <div>
-        <ul>
-            <li>ID: ${Intern.theId()}</li>
-            <li>${Intern.theEmail()}</a></li>
-            <li>School: ${Intern.theSchool()}</li>
-        </ul>
-    </div>
-</div>
-        `;
-    };
-
-    const html = [];
-
-    html.push(team
-        .filter(employee => employee.getRole() === "Manager")
-        .map(Manager => generateManager(Manager))
-    );
-    html.push(team
-        .filter(employee => employee.getRole() === "Engineer")
-        .map(Engineer => generateEngineer(Engineer))
-        .join("")
-    );
-    html.push(team
-        .filter(employee => employee.getRole() === "Intern")
-        .map(Intern => generateIntern(Intern))
-        .join("")
-    );
-
-    return html.join("");
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </body>
+    </html>`
+    return template;
+}
+function generateCard(employee) {
+    var template = `
+    <div class="card text-white bg-danger mx-3" style="max-width: 20rem;">
+        <div class="card-header">${employee.name}</div>
+        <div class="card-body">
+          <h4 class="card-title">${employee.id}</h4>
+          <p class="card-text">${employee.email}</p>
+          ${lastProperty(employee)}
+        </div>
+    </div>`
+return template;
+}
+function lastProperty(employee) {
+    var finalProp = '';
+    if (employee.getRole() === 'Manager') {
+        finalProp = employee.officeNum
+    } else if (employee.getRole() === 'Intern') {
+        finalProp = employee.School
+    } else if (employee.getRole() === 'Engineer'){
+        finalProp = employee.GitHub
+    }
+    var template = `<p class="card-text">${finalProp}</p> `
+    return template
 }
 
-// export function to generate entire page
-module.exports = team => {
-
-    return `<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>My Team</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    </head>
-    <body>
-        <header>
-            <h1>My Team</h1>
-        </header>
-        <main>
-            ${generateTeam(team)}
-        </main>
-    </body>
-</html>
-    `;
-};
+module.exports = generateHtml

@@ -6,7 +6,7 @@ const fs = require('fs');
 //const questionsMan = require('./src/questionsMan');
 //const questionsEng = require('./src/questionsEng');
 //const questionsInt = require('./src/questionsInt');
-const template = require('./src/page-template');
+const generateHtml = require('./src/page-template');
 //const pageTemplate = require('./src/page-template');
 const prompt = inquirer.createPromptModule();
 let team = [];
@@ -82,7 +82,7 @@ const questions2 = [
 
 function init() {
     prompt(questions2).then((data) => {
-        const theManager = new Manager(data.name, data.id, data, data.email, data.officeNum);
+        const theManager = new Manager(data.name, data.id, data.email, data.officeNum);
         team.push(theManager);
         newMember();
     } ) 
@@ -117,7 +117,7 @@ function newMember() {
         }
         if(answer.value === 'Im done') {
             console.log(team);
-            fs.writeFile('dist/team.html', template(team),function() {
+            fs.writeFile('dist/team.html', generateHtml(team),function() {
                 console.log('success');
             } )
         }
