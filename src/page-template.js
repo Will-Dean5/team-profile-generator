@@ -37,15 +37,15 @@ function generateCard(employee) {
     return template;
 }
 function lastProperty(employee) {
-    var finalProp = '';
+    var final = '';
     if (employee.getRole() === 'Manager') {
-        finalProp = employee.officeNum
+        final = employee.officeNum
     } else if (employee.getRole() === 'Intern') {
-        finalProp = employee.School
+        final = employee.School
     } else if (employee.getRole() === 'Engineer') {
-        finalProp = employee.GitHub
+        final = employee.GitHub
     }
-    var template = `<p class="card-text">${finalProp}</p> `
+    var template = `<p class="card-text">${final}</p> `
     return template
 }
 
